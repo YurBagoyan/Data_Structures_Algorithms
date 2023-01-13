@@ -1,2 +1,2 @@
 # Searching algorithms
-Searching Algorithms are designed to check for an element or retrieve an element from any data structure where it is stored. 
+Searching Algorithms are designed to check for an element or retrieve an element from any data structure where it is stored. Search algorithms work to retrieve information stored within particular data structure, or calculated in the search space of a problem domain, with either discrete or continuous values. The appropriate search algorithm often depends on the data structure being searched, and may also include prior knowledge about the data.
