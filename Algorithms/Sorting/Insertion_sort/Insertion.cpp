@@ -1,48 +1,54 @@
 #include <iostream>
 
-void input(int arr[], int const n)
+void printArr(int* arr, const int size)
 {
-    for(int i = 0; i < n; ++i)
+    for (int i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
+    }
+    std::cout << "\n";
+}
+
+void inputSize(int& size)
+{
+    do {
+        std::cout << "Input array size: ";
+        std::cin >> size;
+
+    } while (size < 1);
+}
+
+
+void input(int* arr, const int size)
+{
+    for (int i = 0; i < size; ++i)
     {
         std::cout << "arr [" << i << "] = ";
         std::cin >> arr[i];
     }
 }
 
-void ShowArr(int arr[], int const n)
+void insertionSort(int* arr, const int size)
 {
-    for(int i = 0; i < n; ++i)
-    {
-        std::cout << arr[i] << " ";
-    }
-    std::cout << std::endl;
-}
+    for (int i = 1; i < size; ++i) {
+        const int key = arr[i];
+        int j = i - 1;
 
-void insertionSort(int* arr, int const size)
-{
-    for(int j = 1; j < size; ++j)
-    {
-        int key = arr[j];
-        int i = j - 1;
-
-        while(i >= 0 && arr[i] > key)
-        {
-            arr[i + 2] = arr[i--];
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j--];
         }
-        arr[i+1] = key;
+        arr[j + 1] = key;
     }
 }
 
 int main()
 {
-    int arr [50] = { 9, 4, 6, 3, 10, 12, 2, 0 };
-    int size = 8;
+    int size;
+    inputSize(size);
 
-    //std::cout << "Length of array = ";
-    //std::cin >> size;
+    int* arr = new int[size];
+    input(arr, size);
 
-    //input(arr, size);
-    ShowArr(arr, size);
+    printArr(arr, size);
     insertionSort(arr, size);
-    ShowArr(arr, size);
+    printArr(arr, size);
 }
