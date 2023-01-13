@@ -2,20 +2,20 @@
 
 void input(int arr[], int const n)
 {
-    for(int i = 0; i < n; ++i)
-    {
+    for (int i = 0; i < n; ++i) {
         std::cout << "arr[" << i << "] = ";
         std::cin >> arr[i];
     }
 }
 
-int MaxFinder(int arr[], int const n)
+int MaxFinder(int* arr, int const size)
 {
+    // Create a max variable and initialize it with arr[0]
     int max = arr[0];
-    for(int i = 1; i < n; ++i)
-    {
-        if(arr[i] > max)
-        {
+
+    // Iterate from the first index to the last index of the array
+    for (int i = 1; i < size; ++i) {
+        if (arr[i] > max) {
             max = arr[i];
         }
     }
@@ -24,12 +24,13 @@ int MaxFinder(int arr[], int const n)
 
 int main()
 {
-    int arr[50];
-    int n;
-
+    int size;
     std::cout << "Size of array = ";
-    std::cin >> n;
+    std::cin >> size;
+
+
+    int* arr = new int[size];
     
-    input(arr, n);
-    std::cout << "Max = " << MaxFinder(arr, n) << std::endl;
+    input(arr, size);
+    std::cout << "Max = " << MaxFinder(arr, size) << std::endl;
 }
