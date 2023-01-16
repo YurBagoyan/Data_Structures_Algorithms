@@ -13,26 +13,21 @@ int main()
     randInput(arr, arrSize);
     print(arr, arrSize);
 
-
     /// Create class and build heap
 	using Heap = MaxHeap<int>;
     Heap heap(arr, arrSize);
     heap.print(); 
-
     
     /// Instert
     //heap.insert(10);
     //heap.print();
-    
 
     /// Extarct
     //std::cout << "Extracted element: " << heap.extarct() << std::endl;
     //heap.print();
 
-
     heap.sort();
     heap.print();
-
 
     delete[] arr;
 }
