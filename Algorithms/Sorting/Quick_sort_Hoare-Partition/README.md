@@ -1,5 +1,6 @@
-# Test
+# Quick sort Hoare partition
 
+Hoare partitioning was proposed by Tony Hoare when the Quicksort algorithm was originally published. Instead of working across the array from low to high, it iterates from both ends at once towards the center. This means that we have more iterations, and more comparisons, but fewer swaps.
 
 ## Example
 
