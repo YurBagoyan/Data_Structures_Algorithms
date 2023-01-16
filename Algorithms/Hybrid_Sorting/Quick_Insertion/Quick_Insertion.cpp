@@ -1,8 +1,8 @@
 #include <iostream>
 #include <ctime>
 
-void hybrid_QS(int* arr, int start, int end);
 size_t partition(int* arr, const size_t start, const size_t end);
+void hybridQuickSort(int* arr, const int start, const int end, const int k);
 void insertionSort(int* arr, const size_t start, const size_t end);
 
 size_t inputSize();
@@ -10,53 +10,23 @@ void randomInputArr(int* arr, const size_t size);
 void showArr(int* arr, const size_t size);
 void swap(int& a, int& b);
 
-constexpr size_t MAXSIZE = 100;
 
 //Wraper
 void quickSort(int* arr, const size_t size)
 {
-    hybrid_QS(arr, 0, size - 1);
+    const int k = 5;
+    hybridQuickSort(arr, 0, size - 1, k);
 }
 
 int main()
 {
-    size_t size = 10;
-    int arr[MAXSIZE] = { 6, 8, 7, 4, 5, 4, 1, 9, 9, 4 };
-
-    //size_t size = inputSize();
-    //int* arr = new int[size];
-    //randomInputArr(arr, size);
+    size_t size = inputSize();
+    int* arr = new int[size];
+    randomInputArr(arr, size);
 
     showArr(arr, size);
     quickSort(arr, size);
     showArr(arr, size);
-}
-
-void hybrid_QS(int* arr, int start, int end)
-{
-    const int k = 5;
-    while (start < end) {
-
-        if (end - start + 1 < k) {
-            insertionSort(arr, start, end);
-            break;
-        }
-        else {
-            // Tail recurtion 
-            size_t wall = partition(arr, start, end);
-            hybrid_QS(arr, start, wall - 1);
-            start = wall - 1;
-
-            /*if (wall - start < end - wall) {
-                hybrid_QS(arr, start, wall - 1);
-                end = wall + 1;
-            }
-            else {
-                hybrid_QS(arr, wall + 1, end);
-                start = wall - 1;
-            }*/
-        }   
-    }
 }
 
 size_t partition(int* arr, const size_t start, const size_t end)
@@ -70,22 +40,34 @@ size_t partition(int* arr, const size_t start, const size_t end)
         }
     }
 
-    swap(arr[++wall], arr[end]);
+    ++wall;
+    swap(arr[wall], arr[end]);
     return wall;
+}
+
+void hybridQuickSort(int* arr, int start, const int end, const int k)
+{
+    if (end - start + 1 < k) {
+        // Tail recurtion
+        int wall = partition(arr, start, end);
+        hybridQuickSort(arr, start, wall - 1, k);
+        start = wall - 1;
+    }
+    else {
+        insertionSort(arr, start, end);
+    }
 }
 
 void insertionSort(int* arr, const size_t start, const size_t end)
 {
-    for (size_t i = start + 1; i < end + 1; ++i) {
-        
-        int val = arr[i];
-        size_t j = i;
+    for (int i = start; i <= end; ++i) {
+        const int key = arr[i];
+        int j = i - 1;
 
-        while (j > start && arr[j - 1] > val) {
-            arr[j] = arr[j - 1];
-            --j;
+        while (j >= 0 && arr[j] > key) {
+            arr[j + 1] = arr[j--];
         }
-        arr[j] = val;
+        arr[j + 1] = key;
     }
 }
 
@@ -123,4 +105,3 @@ void swap(int& a, int& b)
     a = b;
     b = temp;
 }
-
