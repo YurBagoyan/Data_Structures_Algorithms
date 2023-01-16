@@ -8,22 +8,18 @@ void randomInputArr(int* arr, const size_t size);
 void showArr(int* arr, const size_t size);
 void swap(int& a, int& b);
 
-constexpr size_t MAXSIZE = 100;
 
 //Wraper
 void quickSort(int* arr, const size_t size)
 {
-    qSort(arr, 0, size-1);
+    qSort(arr, 0, size - 1);
 }
 
 int main()
 {
-    size_t size = 10;
-    int arr[MAXSIZE] = { 6, 8, 7, 4, 5, 4, 1, 9, 9, 4 };
-        
-    //size_t size = inputSize();
-    //int* arr = new int[size];
-    //randomInputArr(arr, size);
+    size_t size = inputSize();
+    int* arr = new int[size];
+    randomInputArr(arr, size);
 
     showArr(arr, size);
     quickSort(arr, size);
@@ -89,4 +85,3 @@ void swap(int& a, int& b)
     a = b;
     b = temp;
 }
-
