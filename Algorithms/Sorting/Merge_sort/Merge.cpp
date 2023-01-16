@@ -27,31 +27,31 @@ void printArr(int* arr, const int size)
 
 void merge(int* arr, int const left, int const mid, int const right) 
 {
-    int const n1 = mid - left + 1;
-    int const n2 = right - mid;
+    int const lSize = mid - left + 1;
+    int const rSize = right - mid;
 
-    int* leftArray = new int[n1 + 1];
-    int* rightArray = new int[n2 + 1];
+    int* leftArray = new int[lSize + 1];
+    int* rightArray = new int[rSize + 1];
 
-    constexpr int MAX = 1000000;
-
-    for (int i = 0; i < n1; ++i) {
+    for (int i = 0; i < lSize; ++i) {
         leftArray[i] = arr[left + i];
     }
-    leftArray[n1] = MAX;
-
-    for (int i = 0; i < n2; ++i) {
+   
+    for (int i = 0; i < rSize; ++i) {
         rightArray[i] = arr[mid + 1 + i];
     }
-    rightArray[n2] = MAX;
+    
 
-    int i = 0, j = 0;
+    int l_idx = 0, r_idx = 0;
     for (int k = left; k <= right; ++k) {
-        if (leftArray[i] < rightArray[j]) {
-            arr[k] = leftArray[i++];
+        if (leftArray[l_idx] < rightArray[r_idx] && l_idx < lSize) {
+            arr[k] = leftArray[l_idx++];
         }
-        else {
-            arr[k] = rightArray[j++];
+        else if (r_idx < rSize){
+            arr[k] = rightArray[r_idx++];
+        }
+        else if (l_idx < lSize) {
+            arr[k] = leftArray[l_idx++];
         }
     }
 
@@ -76,6 +76,7 @@ void mergeSort(int* arr, const int size)
     mergesort(arr, 0, size - 1);
 }
 
+
 int main() {
     int size;
     inputSize(size);
@@ -86,3 +87,5 @@ int main() {
     mergeSort(arr,size);
     printArr(arr, size);
 }
+
+
