@@ -1,68 +1,85 @@
 #include <iostream>
 
-void input(int arr[], int const size)
+void inputSize(int& size)
 {
-    for(int i = 0; i < size; ++i)
-    {
+    do {
+        std::cout << "Input array size: ";
+        std::cin >> size;
+
+    } while (size < 1);
+}
+
+void input(int* arr, int const size)
+{
+    for (int i = 0; i < size; ++i) {
         std::cout << "arr[" << i << "] = ";
         std::cin >> arr[i];
     }
 }
 
-void show(int arr[], int start, int finish) {
-    for(int i = start; i < finish; ++i){
+void printArr(int* arr, const int size) 
+{
+    for (int i = 0; i < size; ++i) {
         std::cout << arr[i] << "  ";
     }
     std::cout << "\n";
 }
 
-void merge(int arr[], int const p, int const q, int const n) {
-    int const n1 = q - p + 1;
-    int const n2 = n - q;
-    int L[n1 + 1], R[n2 + 1];
-    int const  MAX = 1000000;
+void merge(int* arr, int const left, int const mid, int const right) 
+{
+    int const n1 = mid - left + 1;
+    int const n2 = right - mid;
 
-    for(int i = 0; i < n1; ++i) {
-        L[i] = arr[p + i];
+    int* L = new int[n1 + 1];
+    int* R = new int[n2 + 1];
+
+    constexpr int MAX = 1000000;
+
+    for (int i = 0; i < n1; ++i) {
+        L[i] = arr[left + i];
     }
     L[n1] = MAX;
 
-    for(int i = 0; i < n2; ++i) {
-        R[i] = arr[q + 1 + i];
+    for (int i = 0; i < n2; ++i) {
+        R[i] = arr[mid + 1 + i];
     }
     R[n2] = MAX;
 
     int i = 0, j = 0;
-    for(int k = p; k <= n; ++k) {
+    for (int k = left; k <= right; ++k) {
         if (L[i] < R[j]) {
-           arr[k] = L[i++];
-        } else{
+            arr[k] = L[i++];
+        }
+        else {
             arr[k] = R[j++];
         }
     }
 }
 
-void mergeSort(int arr[], int const p, int const n) {
-    if (p < n) {
-        const int q = (p + n) / 2;
+void mergesort(int* arr, int const left, int const right) {
+    if (left < right) {
+        const int mid = (left + right) / 2;
 
-        mergeSort(arr, p, q);
-        mergeSort(arr, q + 1, n);
+        mergesort(arr, left, mid);
+        mergesort(arr, mid + 1, right);
 
-        merge(arr, p, q, n);
+        merge(arr, left, mid, right);
     }
 }
 
-int main(){
-    int const MaxSize = 1000;
-    int arr[MaxSize];
+// Wraper
+void mergeSort(int* arr, const int size)
+{
+    mergesort(arr, 0, size - 1);
+}
 
+int main() {
     int size;
-    std::cout << "Size = ";
-    std::cin >> size;
-    
+    inputSize(size);
+
+    int* arr = new int[size];
     input(arr, size);
 
-    mergeSort(arr, 0, size - 1);
-    show(arr, 0, size);
+    mergeSort(arr,size);
+    printArr(arr, size);
 }
