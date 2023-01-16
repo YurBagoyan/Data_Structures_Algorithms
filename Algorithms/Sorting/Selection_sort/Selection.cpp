@@ -26,20 +26,20 @@ void input(int* arr, int const size)
     }
 }
 
-void sort(int arr[], int const size)
+void sort(int* arr, int const size)
 {
     for (int j = 0; j < size - 1; ++j) {
-        int maxIdx = size - 1;
-        int max = arr[maxIdx];
+        int minIdx = j;
+        int min = arr[minIdx];
 
-        for (int i = maxIdx - 1; i >= j; --i) {
-            if (arr[i] > max) {
-                max = arr[i];
-                maxIdx = i;
+        for (int i = minIdx; i < size; ++i) {
+            if (arr[i] < min) {
+                min = arr[i];
+                minIdx = i;
             }
         }
-        arr[maxIdx] = arr[j];
-        arr[j] = max;
+        arr[minIdx] = arr[j];
+        arr[j] = min;
     }
 }
 
