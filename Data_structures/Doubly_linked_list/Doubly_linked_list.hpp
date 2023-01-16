@@ -1,5 +1,5 @@
-#ifndef LIST_HPP
-#define LIST_HPP
+#ifndef DOUBLY_LINKED_LIST_HPP
+#define DOUBLY_LINKED_LIST_HPP
 
 #include <cassert>
 #include <iostream>
@@ -144,6 +144,6 @@ namespace DataStructure {
 	}
 } // namespace DataStructure
 
-#include "List.impl.hpp"
+#include "Doubly_linked_list.impl.hpp"
 
-#endif // LIST_HPP
+#endif // DOUBLY_LINKED_LIST_HPP
