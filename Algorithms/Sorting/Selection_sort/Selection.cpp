@@ -1,51 +1,57 @@
 #include <iostream>
 
-void show_arr(int arr[], int const n)
+void printArr(int* arr, int const size)
 {
-    for(int i = 0; i < n; ++i)
-    {
-        std::cout << arr[i] << "  ";
+    for (int i = 0; i < size; ++i) {
+        std::cout << arr[i] << " ";
     }
-    std::cout << std::endl;
+    std::cout << "\n";
 }
 
-void input(int arr[], int const n)
+void inputSize(int& size)
 {
-   for(int i = 0; i < n; ++i)
-   {
-       std::cout << "arr[" << i << "] = ";
-       std::cin >> arr[i];
-   }
+    do {
+        std::cout << "Input array size: ";
+        std::cin >> size;
+
+    } while (size < 1);
 }
 
-void sort(int arr[], int const n)
+void input(int* arr, int const size)
 {
-    for(int j = 0; j < n-1; ++j)
+    for (int i = 0; i < size; ++i)
     {
-        int max = arr[n-1], max_index = n-1;
-        for(int i = n-2; i >= j; --i)
-        {
-            if(arr[i] > max)
-            {
+        std::cout << "arr[" << i << "] = ";
+        std::cin >> arr[i];
+    }
+}
+
+void sort(int arr[], int const size)
+{
+    for (int j = 0; j < size - 1; ++j) {
+        int maxIdx = size - 1;
+        int max = arr[maxIdx];
+
+        for (int i = maxIdx - 1; i >= j; --i) {
+            if (arr[i] > max) {
                 max = arr[i];
-                max_index = i;
+                maxIdx = i;
             }
         }
-        arr[max_index] = arr[j];
+        arr[maxIdx] = arr[j];
         arr[j] = max;
     }
 }
 
 int main()
 {
-    int arr[50], n;
+    int size;
+    inputSize(size);
 
-    std::cout << "Size of array = ";
-    std::cin >> n;
+    int* arr = new int[size];
+    input(arr, size);
 
-    input(arr, n);
-    show_arr(arr, n);
-
-    sort(arr, n);
-    show_arr(arr, n);
+    printArr(arr, size);
+    sort(arr, size);
+    printArr(arr, size);
 }
