@@ -10,11 +10,11 @@ class Stack
 {
 public:
     
-	Stack();
+    Stack();
     ~Stack();
 
     //Copy
-	Stack(const Stack& obj);
+    Stack(const Stack& obj);
     Stack& operator=(const Stack& obj);
 
     // Move
@@ -23,10 +23,10 @@ public:
     
 
     void push(const T elm); // Adds an element to the top of the stack
-	void pop();             // Removes the element from the top of the stack
-	T top() const;          // Returns a reference to the top element of the stack without removing it
-	bool empty() const;     // Checks if the stack is empty
-	size_t size() const;    // Returns the number of elements in the stack
+    void pop();             // Removes the element from the top of the stack
+    T top() const;          // Returns a reference to the top element of the stack without removing it
+    bool empty() const;     // Checks if the stack is empty
+    size_t size() const;    // Returns the number of elements in the stack
     void clear();
    
 private:
