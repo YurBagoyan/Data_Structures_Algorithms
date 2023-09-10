@@ -11,7 +11,7 @@ template <typename T>
 Stack<T>::~Stack() 
 {
     m_size = 0;
-	delete[] m_data;
+    delete[] m_data;
 }
 
 template <typename T>
@@ -26,10 +26,8 @@ Stack<T>::Stack(const Stack& obj)
 template <typename T>
 Stack<T>::Stack(Stack&& obj)
 	: m_data(obj.m_data), m_size(obj.m_size), m_capacity(obj.m_capacity)
-{
-    //m_data = new T[m_capacity];
-	
-	obj.m_data = nullptr;
+{	
+    obj.m_data = nullptr;
     obj.m_size = 0;
     obj.m_capacity = DEFAULT_SIZE;
 
@@ -38,29 +36,29 @@ Stack<T>::Stack(Stack&& obj)
 template <typename T>
 Stack<T>& Stack<T>::operator=(const Stack& obj)
 {
-	if(this != &obj) {
-		delete[] m_data;
+    if(this != &obj) {
+	delete[] m_data;
         m_size = obj.m_size;
         m_capacity = obj.m_capacity;
 		
-		m_data = new T[m_capacity];
+	m_data = new T[m_capacity];
         for (size_t i = 0; i < m_size; ++i) {
             m_data[i] = obj.m_data[i];
         }
-	}
+    }
 	
-	return *this;
+    return *this;
 }
 
 template <typename T>
 Stack<T>& Stack<T>::operator=(Stack&& obj)
 {
-	if (this != &obj) {
+    if (this != &obj) {
         delete[] m_data;
         m_size = obj.m_size;
         m_capacity = obj.m_capacity;
 		
-		m_data = obj.m_data;
+	m_data = obj.m_data;
 		
         obj.m_data = nullptr;
         obj.m_size = 0;
@@ -73,7 +71,7 @@ Stack<T>& Stack<T>::operator=(Stack&& obj)
 template <typename T>
 void Stack<T>::push(const T elm)
 {
-	if (m_size == m_capacity) {
+    if (m_size == m_capacity) {
         m_capacity *= 2;
         T* temp = new T[m_capacity];
         for (size_t i = 0; i < m_size; ++i) {
